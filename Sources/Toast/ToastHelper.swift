@@ -14,6 +14,11 @@ class ToastHelper {
         if var topController = keyWindow()?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
                 if presentedViewController is UIAlertController {
+                    if let presentedViewController = presentedViewController.presentedViewController {
+                        topController = presentedViewController
+                    } else {
+                        return topController
+                    }
                 } else {
                     topController = presentedViewController
                 }
